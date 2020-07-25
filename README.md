@@ -12,7 +12,6 @@
 * [About the Project](#about-the-project)
   * [Built With](#built-with)
 * [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
   * [Installation](#installation)
 * [Usage](#usage)
 * [Roadmap](#roadmap)
@@ -22,11 +21,7 @@
 
 ## About The Project
 
-This is the category microservice for my larger 'Radiomarket' project. This service performs basic CRUD operations for 'auction item' categories. This was separated from the items microservice in order to isolate it from the client. 
-
-The API will be exposed only to the admin portal, as deactivating a category will require the execution of a DB trigger to migrate all associated items to a new category. 
-
-In the 
+This is the category microservice for my larger 'Radiomarket' project. This service performs basic CRUD operations for 'auction item' categories. This was separated from the items microservice in order to isolate it from the client as  deactivating a category will require the execution of a DB trigger to migrate all associated items to a new category.
 
 
 ### Built With
@@ -41,10 +36,6 @@ In the
 ## Getting Started
 
 In order to proceed, you need to deploy the [Item Microservice](https://github.com/Jasigler/RadioMarket.ItemService) first. 
-
-
-### Prerequisites
-
 
 
 ### Installation
@@ -75,9 +66,9 @@ Examples of requests and their responses are shown in Postman. Note that the `Ca
 ** Sample data was generated with [Datanamic](https://www.datanamic.com/). These generated items might not reflect the intended business domain. 
 
 ##### Get all active categories:
+![Get all active categories](https://github.com/Jasigler/RadioMarket.CategoryService/blob/master/images/get_categories.PNG)
 ##### Create a new Category:
-##### Patch an existing category
-
+![Create new](https://github.com/Jasigler/RadioMarket.CategoryService/blob/master/images/add_category.PNG)
 
 
 ## Roadmap
