@@ -1,0 +1,8 @@
+C:\Code\Radiomarket\RadioMarket.CategoryService\DataLayer\bin\Release\netcoreapp3.1\DataLayer.deps.json
+C:\Code\Radiomarket\RadioMarket.CategoryService\DataLayer\bin\Release\netcoreapp3.1\DataLayer.dll
+C:\Code\Radiomarket\RadioMarket.CategoryService\DataLayer\bin\Release\netcoreapp3.1\DataLayer.pdb
+C:\Code\Radiomarket\RadioMarket.CategoryService\DataLayer\obj\Release\netcoreapp3.1\DataLayer.AssemblyInfoInputs.cache
+C:\Code\Radiomarket\RadioMarket.CategoryService\DataLayer\obj\Release\netcoreapp3.1\DataLayer.AssemblyInfo.cs
+C:\Code\Radiomarket\RadioMarket.CategoryService\DataLayer\obj\Release\netcoreapp3.1\DataLayer.csproj.CoreCompileInputs.cache
+C:\Code\Radiomarket\RadioMarket.CategoryService\DataLayer\obj\Release\netcoreapp3.1\DataLayer.dll
+C:\Code\Radiomarket\RadioMarket.CategoryService\DataLayer\obj\Release\netcoreapp3.1\DataLayer.pdb
