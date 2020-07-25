@@ -23,6 +23,19 @@
 
 This is the category microservice for my larger 'Radiomarket' project. This service performs basic CRUD operations for 'auction item' categories. This was separated from the items microservice in order to isolate it from the client as  deactivating a category will require the execution of a DB trigger to migrate all associated items to a new category.
 
+A category consists of the following: 
+``` c#
+  int category_id,
+  string name, 
+  int? parent_id,
+  bool is_active
+```
+
+A category is either a parent or a child/sub-category as denoted by the value of it's `parent_id` field. A `null` value is set for all parent categories, and it's `category_id` will be set as the `parent_id` of any sub-categories.
+
+The `is_active` boolean is used as a filter when returning categories. In order to preserve data integrity for future reporting/auditing, etc, categories can simply be deactivated to preserve the item-category relationship.
+
+There are two triggers that execute audit functions when a category is updated, created, or deactivaated. These functions write to an audit table that include the time, action, and user. 
 
 ### Built With
 
@@ -83,6 +96,6 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
 
 [@that_sigler](https://twitter.com/that_sigler) - jason.sigler@outlook.com
 
-Project Link: [https://github.com/jasigler/repo_name](https://github.com/your_username/repo_name)
+Project Link: [https://github.com/jasigler/repo_name](https://github.com/your_username/RadioMarket.CategoryService)
 
 
