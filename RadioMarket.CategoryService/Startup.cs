@@ -1,6 +1,9 @@
 using AutoMapper;
 using DataLayer.Context;
+using HealthCheck.HealthChecks;
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -26,21 +29,35 @@ namespace RadioMarket.CategoryService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
             services.AddDbContext<ItemContext>(options =>
             {
                 options.UseNpgsql(Configuration.GetConnectionString("ItemConnection"));
             });
             services.AddAutoMapper(typeof(Startup));
             services.TryAddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddHealthChecksUI(options =>
+            {
+                options.AddHealthCheckEndpoint("main", "https://localhost:1761/health");
+            }).AddInMemoryStorage();
             services.AddHealthChecks()
-                .AddCheck("Default", () =>
-                HealthCheckResult.Healthy("Healthy"), tags: new[] { "default" });
+                .AddCheck<MemoryHealthCheck>("memory", tags: new[] { "memory" })
+                .AddNpgSql(Configuration.GetConnectionString("ItemConnection"),
+                    healthQuery: "SELECT 1",
+                    name: "sql",
+                    failureStatus: HealthStatus.Unhealthy,
+                    tags: new[] { "database" });
+
             services.AddCors(options =>
             {
                 options.AddPolicy(name: AllowSpecificOrigins,
                    builder =>
                    builder.WithOrigins("localhost").AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+            });
+
+            services.Configure<IISServerOptions>(options =>
+            {
+                options.AutomaticAuthentication = false;
             });
         }
 
@@ -59,11 +76,17 @@ namespace RadioMarket.CategoryService
             app.UseCors(AllowSpecificOrigins);
 
             app.UseAuthorization();
-
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHealthChecks("/health");
+                endpoints.MapHealthChecksUI();
+                endpoints.MapHealthChecks("health", new HealthCheckOptions()
+                {
+                    Predicate = _ => true, 
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                });
+                    
             });
         }
     }

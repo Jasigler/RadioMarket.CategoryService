@@ -27,7 +27,6 @@ namespace Services
         public async Task<IEnumerable<Category>> GetCategories()
         {
             return await _context.Categories
-                .Where(category => category.is_active == true)
                 .ToListAsync<Category>();
         }
 
@@ -88,8 +87,10 @@ namespace Services
                     target.is_active = false;
                     await _context.SaveChangesAsync();
                 }
-            }
+                else target.is_active = (bool)updateDto.is_active;
 
+            }
+            
             await _context.SaveChangesAsync();
 
             return ReqResult.Success;
