@@ -1,10 +1,13 @@
+CREATE SEQUENCE category_id_sequence START 100;
 CREATE TABLE "Categories" (
-	category_id BIGSERIAL,
+	category_id int DEFAULT NEXTVAL('category_id_sequence'),
 	name varchar(20) NOT NULL,
 	parent_id int,
 	is_active bool NOT NULL,
 	CONSTRAINT "PK_Category" PRIMARY KEY (category_id)
-)
+);
+
+
 
 insert into public."Categories" (name, parent_id, is_active) 
 values 
