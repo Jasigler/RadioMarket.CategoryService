@@ -2,7 +2,7 @@
   <h3 align="center">RadioMarket Item Service API</h3>
 
   <p align="center">
-    Category microservice for my 'Radiomarket' e-commerce project
+    Example 'category' microservice for an e-commerce website.
 </p>
 
 
@@ -21,7 +21,7 @@
 
 ## About The Project
 
-This is the category microservice for my larger 'Radiomarket' project. This service performs basic CRUD operations for 'auction item' categories. This was separated from the items microservice in order to isolate it from the client as  deactivating a category will require the execution of a DB trigger to migrate all associated items to a new category.
+This is a category microservice for an e-commerce/auction website. This service performs basic CRUD operations for 'auction item' categories. This was separated from the items microservice in order to isolate it from the client as  deactivating a category will require the execution of a DB trigger to migrate all associated items to a new category.
 
 A category consists of the following: 
 ``` c#
